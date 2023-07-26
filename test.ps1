@@ -5,7 +5,7 @@ Invoke-WebRequest -Uri $fslogixInstallerUrl -OutFile $fslogixInstallerPath
 
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
-
+cd c:\test\ckumar
 # Enable FSLogix for all users on the session host
 $fslogixRegPath = "HKLM:\SOFTWARE\FSLogix\Profiles"
 $fslogixRegValue = "Enabled"
