@@ -6,7 +6,7 @@ cd c:\avd
 mkdir ckumar
 cd
 
-if 
+if { a -eq
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
 cd c:\test\ckumar
