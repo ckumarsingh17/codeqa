@@ -4,7 +4,7 @@ $fslogixInstallerPath = "C:\Temp\FSLogixInstaller.exe" # Change to desired insta
 Invoke-WebRequest -Uri $fslogixInstallerUrl -OutFile $fslogixInstallerPath
 cd c:\avd
 mkdir ckumar
-
+cd
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
 
