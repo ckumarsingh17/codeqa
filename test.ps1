@@ -5,6 +5,8 @@ Invoke-WebRequest -Uri $fslogixInstallerUrl -OutFile $fslogixInstallerPath
 cd c:\avd
 mkdir ckumar
 cd
+
+if 
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
 cd c:\test\ckumar
