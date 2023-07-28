@@ -12,12 +12,13 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up PowerShell
-      uses: microsoft/powershell@v1
-
-    - name: Install Pester
-      run: Install-Module -Name Pester -Force -SkipPublisherCheck
+      shell: pwsh
+      run: |
+        # If you need to install Pester, uncomment the following line
+        # Install-Module -Name Pester -Force -SkipPublisherCheck
 
     - name: Run Pester tests
+      shell: pwsh
       run: |
         $testResults = Invoke-Pester -Path ./tests
         if ($testResults.FailedCount -gt 0) {
