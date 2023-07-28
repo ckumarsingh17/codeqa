@@ -1,0 +1,25 @@
+name: Pester Tests
+
+on:
+  push: # Trigger the workflow when code is pushed to the repository
+
+jobs:
+  test:
+    runs-on: windows-latest # You can also use macOS-latest or ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PowerShell
+      uses: microsoft/powershell@v1
+
+    - name: Install Pester
+      run: Install-Module -Name Pester -Force -SkipPublisherCheck
+
+    - name: Run Pester tests
+      run: |
+        $testResults = Invoke-Pester -Path ./tests
+        if ($testResults.FailedCount -gt 0) {
+            throw "Pester tests failed."
+        }
