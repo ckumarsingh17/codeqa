@@ -7,7 +7,7 @@ mkdir ckumar
 cd
 else
 if else
-
+$Password1 = "abc@1234"
 $Password = "test@123"#
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
