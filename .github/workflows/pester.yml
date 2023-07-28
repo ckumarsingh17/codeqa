@@ -20,7 +20,7 @@ jobs:
     - name: Run Pester tests
       shell: pwsh
       run: |
-        $testResults = Invoke-Pester -Path ./tests
+        $testResults = Invoke-Pester *pester.tests.ps1 ./tests
         if ($testResults.FailedCount -gt 0) {
             throw "Pester tests failed."
         }
