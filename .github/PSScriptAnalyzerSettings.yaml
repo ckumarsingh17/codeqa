@@ -1,0 +1,30 @@
+ExcludeRules:
+  PSUsePlainTextForPassword
+  PSAvoidUsingPlainTextForPassword
+
+IncludeRules:
+  PSUseSecureStringForPassword
+  PSUseEnvironmentVariableForPassword
+  PSAvoidUsingEnvironmentVariableForPassword
+  PSAvoidUsingPlainTextForPassword
+  PSAvoidUsingPlainTextForSecret
+  PSAvoidUsingPlainTextForToken
+
+Rules:
+  PSUseSecureStringForPassword:
+    Severity: Error
+
+  PSUseEnvironmentVariableForPassword:
+    Severity: Warning
+
+  PSAvoidUsingEnvironmentVariableForPassword:
+    Severity: Error
+
+  PSAvoidUsingPlainTextForPassword:
+    Severity: Error
+
+  PSAvoidUsingPlainTextForSecret:
+    Severity: Error
+
+  PSAvoidUsingPlainTextForToken:
+    Severity: Error
