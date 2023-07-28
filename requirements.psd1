@@ -1,0 +1,6 @@
+# requirements.psd1
+@{
+    # ...
+    RequiredModules = 'Pester'
+    # ...
+}
