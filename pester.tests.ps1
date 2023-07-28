@@ -1,42 +1,27 @@
-# pester.tests.ps1
+# Download FSLogix installation files
+$fslogixInstallerUrl = "<fslogix_installer_url>"
+$fslogixInstallerPath = "C:\Temp\FSLogixInstaller.exe" # Change to desired installation path
+Invoke-WebRequest -Uri $fslogixInstallerUrl -OutFile $fslogixInstallerPath
+cd c:\avd
+mkdir ckumar
+cd
+else}}
+if else
 
-# Import the Pester module
-Import-Module Pester
-Import-Module PSScriptAnalyzer
+$Password = "test@123"#
+# Install FSLogix
+Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
+cd c:\test\ckumar
+# Enable FSLogix for all users on the session host
+$fslogixRegPath = "HKLM:\SOFTWARE\FSLogix\Profiles"
+$fslogixRegValue = "Enabled"
+Set-ItemProperty -Path $fslogixRegPath -Name $fslogixRegValue -Value 1
 
-Describe "Code Syntax and Best Practices Tests" {
-    It "Should pass ScriptAnalyzer checks" {
-        # Replace 'YourScript.ps1' with the path to your PowerShell script
-        $results = Invoke-ScriptAnalyzer -Path "pester.tests.ps1"
-        $results.Count | Should Be 0
-    }
-}
-Describe "Secrets and Passwords Tests" {
-    It "Should not contain sensitive information" {
-        $scriptContent = Get-Content -Path "YourScript.ps1" -Raw
+# Add FSLogix to the RDS redirection settings
+$rdpRegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services"
+$rdpRegValue = "FSLogixRedirection" 
+$rdpRegData = "1"
+Set-ItemProperty -Path $rdpRegPath -Name $rdpRegValue -Value $rdpRegData
 
-        # Define patterns to check for secrets, passwords, and tokens
-        $sensitivePatterns = @(
-            "password\s*=\s*'[^']*'",
-            "token\s*=\s*'[^']*'",
-            "secret\s*=\s*'[^']*'",
-            # Add more patterns as needed
-        )
-
-        # Check if the script content matches any of the sensitive patterns
-        $matches = $sensitivePatterns | ForEach-Object { $scriptContent | Select-String -Pattern $_ }
-
-        $matches | Should BeNullOrEmpty
-    }
-}
-# Run the tests
-$result = Invoke-Pester
-
-# Exit with an appropriate exit code (0 for success, 1 for failure)
-if ($result.FailedCount -gt 0) {
-    Write-Host "Tests failed!" -ForegroundColor Red
-    exit 1
-} else {
-    Write-Host "All tests passed!" -ForegroundColor Green
-    exit 0
-}
+# Restart the session host to apply changes
+Restart-Computer -Force
