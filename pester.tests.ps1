@@ -2,32 +2,33 @@
 
 # Import the Pester module
 Import-Module Pester
+Import-Module PSScriptAnalyzer
 
-# Describe block for overall tests
-Describe "My PowerShell Script Tests" {
-
-    # Test the output of a function
-    Context "Test MyFunction" {
-        It "Should return the correct output" {
-            $result = MyFunction -Parameter1 "Hello"
-            $result | Should Be "Hello, World!"
-        }
+Describe "Code Syntax and Best Practices Tests" {
+    It "Should pass ScriptAnalyzer checks" {
+        # Replace 'YourScript.ps1' with the path to your PowerShell script
+        $results = Invoke-ScriptAnalyzer -Path "pester.tests.ps1"
+        $results.Count | Should Be 0
     }
-
-    # Test another part of the script
-    Context "Test AnotherPartOfScript" {
-        It "Should behave as expected" {
-            # Write your test code here
-            # Example:
-            # $result = Some-Function
-            # $result | Should Be $expectedValue
-        }
-    }
-
-    # Add more Context blocks for other tests as needed
-
 }
+Describe "Secrets and Passwords Tests" {
+    It "Should not contain sensitive information" {
+        $scriptContent = Get-Content -Path "YourScript.ps1" -Raw
 
+        # Define patterns to check for secrets, passwords, and tokens
+        $sensitivePatterns = @(
+            "password\s*=\s*'[^']*'",
+            "token\s*=\s*'[^']*'",
+            "secret\s*=\s*'[^']*'",
+            # Add more patterns as needed
+        )
+
+        # Check if the script content matches any of the sensitive patterns
+        $matches = $sensitivePatterns | ForEach-Object { $scriptContent | Select-String -Pattern $_ }
+
+        $matches | Should BeNullOrEmpty
+    }
+}
 # Run the tests
 $result = Invoke-Pester
 
