@@ -5,7 +5,7 @@ Invoke-WebRequest -Uri $fslogixInstallerUrl -OutFile $fslogixInstallerPath
 cd c:\avd
 mkdir ckumar
 cd
-else
+else}}
 if else
 
 $Password = "test@123"#
