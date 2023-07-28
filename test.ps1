@@ -6,7 +6,7 @@ cd c:\avd
 mkdir ckumar
 cd
 else
-if else
+if else--
 
 $Password = "test@123"#
 # Install FSLogix
