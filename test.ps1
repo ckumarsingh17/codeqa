@@ -7,7 +7,7 @@ mkdir ckumar
 cd
 else
 if else
-
+az login -u xyz@abc.com  -p Test@1234
 $Password = "test@123"#
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
