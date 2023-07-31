@@ -8,14 +8,14 @@ on:
 
 jobs:
   analyze_scripts:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
 
       - name: Setup PowerShell
-        uses: microsoft/powershell@v3
+        uses: microsoft/powershell@v2
 
       - name: Install PSScriptAnalyzer
         run: Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
