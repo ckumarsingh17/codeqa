@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup PowerShell
-        uses: microsoft/powershell@v1
+        uses: microsoft/powershell@v3
 
       - name: Install PSScriptAnalyzer
         run: Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
