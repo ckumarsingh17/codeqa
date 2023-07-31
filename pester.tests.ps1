@@ -30,7 +30,7 @@ Describe "Secrets and Passwords Tests" {
     }
 }
 # Run the tests
-$result = Invoke-Pester
+$result = Invoke-Pester -Path "pester.tests.ps1"
 
 # Exit with an appropriate exit code (0 for success, 1 for failure)
 if ($result.FailedCount -gt 0) {
