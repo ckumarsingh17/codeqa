@@ -17,9 +17,9 @@ Describe "Secrets and Passwords Tests" {
 
         # Define patterns to check for secrets, passwords, and tokens
         $sensitivePatterns = @(
-            'password\s*=\s*'[^']*'',
-            'token\s*=\s*'[^']*'',
-            'secret\s*=\s*'[^']*'',
+            "password\s*=\s*'[^']*'",
+            "token\s*=\s*'[^']*'",
+            "secret\s*=\s*'[^']*'"
             # Add more patterns as needed
         )
 
