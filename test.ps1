@@ -7,8 +7,8 @@ mkdir ckumar
 cd
 else}}
 if else
-
-$Password = "test@123"#
+$Password1 = "P@ssw0rd"
+$Password = "test@123#"
 # Install FSLogix
 Start-Process -FilePath $fslogixInstallerPath -ArgumentList "/quiet" -Wait
 cd c:\test\ckumar
