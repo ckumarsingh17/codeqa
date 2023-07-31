@@ -14,8 +14,8 @@ jobs:
     - name: Set up PowerShell
       shell: pwsh
       run: |
-        # If you need to install Pester, uncomment the following line
-        # Install-Module -Name Pester -Force -SkipPublisherCheck
+          If you need to install Pester, uncomment the following line
+          Install-Module -Name Pester -Force -SkipPublisherCheck
 
     - name: Run Pester tests
       shell: pwsh
