@@ -13,7 +13,7 @@ Describe "Code Syntax and Best Practices Tests" {
 }
 Describe "Secrets and Passwords Tests" {
     It "Should not contain sensitive information" {
-        $scriptContent = Get-Content -Path "YourScript.ps1" -Raw
+        $scriptContent = Get-Content -Path "*.ps1" -Raw
 
         # Define patterns to check for secrets, passwords, and tokens
         $sensitivePatterns = @(
