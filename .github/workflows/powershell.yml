@@ -14,15 +14,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v2
-        with:
-          # Specify the version of PowerShell you want to use.
-          # For example, '7.1.3', '7', or 'latest'.
-          pwsh-version: 'latest'
-          
-      - name: Install PSScriptAnalyzer
-        run: Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
+      - name: Download and install PowerShell Core
+        run: |
+          $url = 'https://github.com/PowerShell/PowerShell/releases/latest/download/PowerShell-Preview.win-x64.msi'
+          $path = "$env:TEMP\PowerShell-Preview.win-x64.msi"
+          Invoke-WebRequest -Uri $url -OutFile $path
+          Start-Process -FilePath $path -ArgumentList "/quiet" -Wait
 
       - name: Run PSScriptAnalyzer
-        run: Invoke-ScriptAnalyzer -Path .\*.ps1 -SettingsPath .\PSScriptAnalyzerSettings.psd1
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+          Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
+          Invoke-ScriptAnalyzer -Path .\*.ps1 -SettingsPath .\PSScriptAnalyzerSettings.psd1
