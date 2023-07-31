@@ -12,11 +12,15 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup PowerShell
-        uses: microsoft/powershell@v2
-
+        uses: actions/setup-powershell@v2
+        with:
+          # Specify the version of PowerShell you want to use.
+          # For example, '7.1.3', '7', or 'latest'.
+          pwsh-version: 'latest'
+          
       - name: Install PSScriptAnalyzer
         run: Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
 
