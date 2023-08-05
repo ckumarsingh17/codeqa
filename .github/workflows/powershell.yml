@@ -1,4 +1,4 @@
-name: PSScriptAnalyzer Scan
+name: pesterscan
 
 on:
   push:
@@ -21,8 +21,7 @@ jobs:
           Invoke-WebRequest -Uri $url -OutFile $path
           Start-Process -FilePath $path -ArgumentList "/quiet" -Wait
 
-      - name: Run PSScriptAnalyzer
+      - name: Run tests  
+        shell: pwsh
         run: |
-          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-          Install-Module -Name PSScriptAnalyzer -Force -SkipPublisherCheck
-          Invoke-ScriptAnalyzer -Path .\*.ps1 -SettingsPath .\PSScriptAnalyzerSettings.psd1
+          Invoke-Pester -Path '/secure.tests.ps1'
